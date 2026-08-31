@@ -1,0 +1,36 @@
+<!-- ============================================================
+     includes/header.html
+     Canonical site header. Edit ONLY this file to change nav
+     sitewide — build.py stitches it into every page at build time.
+     All links are root-relative ("/...") so this fragment works
+     unmodified no matter how deep the page lives (/, /tools/, /legal/).
+     ============================================================ -->
+<header id="site-header">
+  <div class="container nav-wrap">
+    <a class="logo" href="/">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" stroke-width="2"/></svg></span>
+      BitsServer<span class="neon-text">&nbsp;IT&nbsp;Lab</span>
+    </a>
+
+    <input class="nav-check" id="nav-check" type="checkbox" aria-label="Toggle menu" />
+
+    <nav id="main-nav">
+      <ul>
+        <li><a href="/#hero">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/#tech-stack">Technology</a></li>
+        <li><a href="/#highlights">About</a></li>
+        <li><a href="/tools/">Free Tools</a></li>
+        <li><a href="/#testimonials">Clients</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.85 1.85M17.55 17.55l1.85 1.85M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.85-1.85M17.55 6.45l1.85-1.85" stroke-linecap="round" stroke-width="1.8"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2Z" stroke-linejoin="round" stroke-width="1.8"/></svg>
+    </button>
+    <a class="btn btn-primary nav-cta" href="/#contact" style="padding:10px 22px;font-size:13px;">Get Started</a>
+    <label class="nav-burger" for="nav-check" aria-label="Open menu"><span></span><span></span><span></span></label>
+  </div>
+</header>

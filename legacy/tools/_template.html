@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<!-- Inline, blocking, and intentionally tiny: sets the saved theme before CSS
+     paints so a manual Light/Dark choice never flashes the wrong theme for a
+     frame. Mirrors the "bitsserver-theme" logic in js/main.js. Keep this in
+     any new tool page copied from this template. -->
+<script>(function(){try{var t=localStorage.getItem('bitsserver-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+<!-- EDIT: page title -->
+<title>TOOL NAME — Free Tools — BitsServer IT Lab</title>
+<meta name="description" content="TOOL NAME is coming soon from BitsServer IT Lab — a free browser-based IT utility." />
+<meta name="robots" content="index, follow" />
+<!-- EDIT: canonical slug -->
+<link rel="canonical" href="https://www.bitsserver.com/tools/TOOL-SLUG.html" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:title" content="TOOL NAME — BitsServer IT Lab" />
+<meta property="og:description" content="TOOL NAME is coming soon from BitsServer IT Lab." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.bitsserver.com/tools/TOOL-SLUG.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css?v=20260809" />
+</head>
+<body>
+<div id="scroll-progress"></div>
+<div id="cursor-glow"></div>
+
+<div data-include="/includes/header.html"></div>
+
+<main>
+<section class="legal-banner">
+<svg class="brand-watermark" viewBox="0 0 140 140" aria-hidden="true">
+<defs>
+<linearGradient id="bsGradW" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#00E5FF"/><stop offset="55%" stop-color="#0A84FF"/><stop offset="100%" stop-color="#7B61FF"/>
+</linearGradient>
+</defs>
+<g fill="url(#bsGradW)">
+<rect x="34" y="16" width="17" height="106" rx="8.5"/>
+<rect x="34" y="16" width="60" height="44" rx="22"/>
+<rect x="34" y="64" width="68" height="58" rx="29"/>
+<path d="M38,108 L38,132 L60,110 Z"/>
+</g>
+</svg>
+<div class="container">
+<span class="section-tag">Free Tools</span>
+<!-- EDIT: tool name -->
+<h1><span class="neon-text">TOOL NAME</span></h1>
+<p>This tool is in active development. Check back soon.</p>
+<div class="legal-meta">
+<span class="glass legal-chip"><span class="dot"></span> Coming Soon</span>
+</div>
+</div>
+</section>
+
+<section id="legal-body">
+<div class="container">
+<div class="legal-layout" style="grid-template-columns:1fr;">
+<article class="legal-content glass">
+<div class="legal-highlight">
+<strong>What it will do —</strong> <!-- EDIT: one-line description of the tool's purpose -->
+Placeholder description of what TOOL NAME will let visitors do once launched.
+</div>
+<div class="legal-section">
+<h2><span class="legal-num">01</span> Notify Me</h2>
+<p>Want to know the moment this ships? Reach out and we'll let you know.</p>
+<a class="btn btn-primary" href="mailto:support@bitsserver.com">Notify Me</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<section id="cta-banner">
+<div class="container">
+<div class="cta-box glass reveal">
+<h2>Explore Our <span class="neon-text">Other Free Tools</span></h2>
+<p>Browse the full library while this one is being built.</p>
+<div class="hero-btns">
+<a class="btn btn-primary" href="/tools/">All Free Tools</a>
+<a class="btn btn-outline" href="/#contact">Contact Us</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<div data-include="/includes/footer.html"></div>
+
+<script src="/js/include.js" data-then="/js/main.js?v=20260809"></script>
+</body>
+</html>

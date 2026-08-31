@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- Inline, blocking, and intentionally tiny: sets the saved theme before CSS
+     paints so a manual Light/Dark choice never flashes the wrong theme for a
+     frame. Mirrors the "bitsserver-theme" logic in js/main.js. -->
+<script>(function(){try{var t=localStorage.getItem('bitsserver-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+<title>Page Not Found — BitsServer IT Lab</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css?v=20260811" />
+</head>
+<body>
+
+<div data-include="/includes/header.html"></div>
+     
+  <main>
+    <section class="page-banner">
+      <div class="container">
+        <span class="section-tag">404</span>
+        <h1>Page Not <span class="neon-text">Found</span></h1>
+        <p>The page you're looking for doesn't exist or has moved.</p>
+        <div class="hero-btns" style="justify-content:center;margin-top:28px;">
+          <a class="btn btn-primary" href="/">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+<div data-include="/includes/footer.html"></div>
+     
+
+<script src="/js/include.js" data-then="/js/main.js?v=20260824"></script>
+</body>
+</html>

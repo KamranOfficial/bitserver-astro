@@ -28,12 +28,12 @@
 	"private": true,
 	"scripts": {
 		"astro": "astro",
-		"build": "astro build",
+		"build": "node scripts/migrate-legacy.mjs && astro build && node scripts/preserve-legacy-urls.mjs",
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
-		"dev": "astro dev",
-		"preview": "astro build && wrangler dev"
+		"dev": "node scripts/migrate-legacy.mjs && astro dev",
+		"preview": "npm run build && astro preview"
 	},
 	"type": "module"
 }
