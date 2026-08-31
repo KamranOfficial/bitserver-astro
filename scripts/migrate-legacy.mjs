@@ -31,7 +31,12 @@ for (const sourcePage of sourcePages) {
   const astro = source
     .replace(/<div\s+data-include="\/includes\/header\.html"\s*><\/div>/g, header)
     .replace(/<div\s+data-include="\/includes\/footer\.html"\s*><\/div>/g, footer)
-    .replace(/<script\s+src="\/js\/include\.js"[^>]*><\/script>/g, '<script is:inline src="/js/main.js"></script>');
+    .replace(/<script\s+src="\/js\/include\.js"\s+data-then="([^"]+)"\s*><\/script>/g, (_, scripts) =>
+      scripts
+        .split(',')
+        .map((script) => `<script is:inline src="${script.trim()}"></script>`)
+        .join('\n'),
+    );
   const destination = join(pages, sourcePage.replace(/\.html$/, '.astro'));
   await mkdir(dirname(destination), { recursive: true });
   await writeFile(destination, astro);
