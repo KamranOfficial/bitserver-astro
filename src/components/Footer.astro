@@ -77,9 +77,9 @@ const year = new Date().getFullYear();
           /cdn-cgi/scripts/.../email-decode.min.js as a render-blocking script
           (474 ms of blocking time for 1.2 KiB).
         -->
-        <Fragment set:html="<!--email_off-->" />
+        
         <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
-        <Fragment set:html="<!--/email_off-->" />
+        
         <span aria-hidden="true">·</span>
         <a href={`tel:${CONTACT.phoneRaw}`}>{CONTACT.phone}</a>
       </span>
