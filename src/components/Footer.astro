@@ -48,6 +48,15 @@ const year = new Date().getFullYear();
           <span class="dot" aria-hidden="true"></span>
           <span class="mono">All systems operational</span>
         </div>
+<div class="socials__row">
+            {
+              CONTACT.socials.map((s) => (
+                <a href={s.href} rel="noopener" target="_blank">
+                  {s.label}
+                </a>
+              ))
+            }
+          </div>
       </div>
 
       {
