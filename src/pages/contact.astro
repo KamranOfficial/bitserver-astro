@@ -209,6 +209,29 @@ const offices = [
     width: 100%;
     height: 100%;
     display: block;
+    opacity: 0;
+    transition: opacity 0.8s var(--ease);
+  }
+  #comms-canvas.is-live {
+    opacity: 1;
+  }
+  /* Static backdrop — the only one shown where WebGL is gated off. */
+  .chero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 46% 40% at 26% 52%, rgba(60, 231, 196, 0.2), transparent 68%),
+      radial-gradient(ellipse 40% 36% at 78% 30%, rgba(139, 108, 255, 0.16), transparent 70%),
+      linear-gradient(180deg, #060b16 0%, #04070d 70%, var(--bg) 100%);
+  }
+  .chero.no-webgl .chero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(4, 7, 13, 0.5) 0%,
+      rgba(4, 7, 13, 0.1) 38%,
+      rgba(4, 7, 13, 0.55) 100%
+    );
   }
   .chero__scrim {
     position: absolute;
@@ -485,15 +508,26 @@ const offices = [
 </style>
 
 <script>
-  import { initComms } from '../scripts/comms3d.js';
+  import { deviceTier, onFirstIntent } from '../scripts/scene-gate.js';
 
   const canvas = document.getElementById('comms-canvas');
-  if (canvas) {
-    try {
-      initComms(canvas);
-    } catch {
-      canvas.style.display = 'none';
-    }
+  if (canvas && deviceTier() === 'off') {
+    // Phones / low-power / metered / reduced-motion: never fetch Three.js.
+    canvas.remove();
+    document.querySelector('.chero')?.classList.add('no-webgl');
+  } else if (canvas) {
+    // Capable desktop: load the chunk on the first real gesture so scene
+    // construction never lands inside the page's load window.
+    onFirstIntent(async () => {
+      try {
+        const { initComms } = await import('../scripts/comms3d.js');
+        initComms(canvas);
+        canvas.classList.add('is-live');
+      } catch {
+        canvas.remove();
+        document.querySelector('.chero')?.classList.add('no-webgl');
+      }
+    });
   }
 
   const WA = 'https://wa.me/971507155863';

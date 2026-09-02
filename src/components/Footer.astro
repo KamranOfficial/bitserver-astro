@@ -71,7 +71,15 @@ const year = new Date().getFullYear();
     <div class="foot__base">
       <span>© {year} BitsServer IT Lab. All rights reserved.</span>
       <span class="foot__contact">
+        <!--
+          email_off tells Cloudflare's Scrape Shield to skip obfuscating this
+          address. Without it, Cloudflare rewrites the link and injects
+          /cdn-cgi/scripts/.../email-decode.min.js as a render-blocking script
+          (474 ms of blocking time for 1.2 KiB).
+        -->
+        <Fragment set:html="<!--email_off-->" />
         <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+        <Fragment set:html="<!--/email_off-->" />
         <span aria-hidden="true">·</span>
         <a href={`tel:${CONTACT.phoneRaw}`}>{CONTACT.phone}</a>
       </span>

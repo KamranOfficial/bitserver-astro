@@ -215,8 +215,15 @@ const stack = [
 </style>
 
 <script>
+  import { deviceTier } from '../scripts/scene-gate.js';
+
   const canvas = document.getElementById('globe-canvas');
-  if (canvas) {
+  // Same gate as the hero: the 135 KB Three.js chunk is never fetched on
+  // phones, low-power hardware, metered data or reduced-motion.
+  if (canvas && deviceTier() === 'off') {
+    canvas.remove();
+    document.querySelector('.globe')?.classList.add('no-webgl');
+  } else if (canvas) {
     const io = new IntersectionObserver(
       async (entries) => {
         if (!entries[0].isIntersecting) return;

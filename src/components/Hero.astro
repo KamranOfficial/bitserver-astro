@@ -8,6 +8,7 @@ const stats = [
 ---
 
 <section class="hero" id="top">
+  <div class="hero__still" aria-hidden="true"></div>
   <canvas class="hero__canvas" id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="hero__scan" aria-hidden="true"></div>
@@ -70,6 +71,41 @@ const stats = [
     width: 100%;
     height: 100%;
     z-index: -2;
+    opacity: 0;
+    transition: opacity 0.8s var(--ease);
+  }
+  .hero__canvas.is-live {
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------------------
+     Static substrate. Painted by CSS on every device, and used as the
+     only hero backdrop on phones, low-power hardware, metered data and
+     reduced-motion — where the WebGL scene is never loaded at all.
+     --------------------------------------------------------------- */
+  .hero__still {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    background:
+      radial-gradient(ellipse 58% 44% at 50% 88%, rgba(60, 231, 196, 0.2), transparent 68%),
+      radial-gradient(ellipse 44% 38% at 82% 22%, rgba(139, 108, 255, 0.18), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 12% 34%, rgba(26, 169, 141, 0.12), transparent 72%),
+      linear-gradient(180deg, #060b16 0%, #04070d 62%, var(--bg) 100%);
+  }
+  /* Perspective floor grid — the flavour of the 3D rack field, in pure CSS. */
+  .hero__still::after {
+    content: '';
+    position: absolute;
+    inset: 42% 0 0;
+    background-image:
+      linear-gradient(to right, rgba(60, 231, 196, 0.16) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(60, 231, 196, 0.16) 1px, transparent 1px);
+    background-size: 46px 46px;
+    transform: perspective(340px) rotateX(64deg);
+    transform-origin: 50% 0;
+    mask-image: linear-gradient(180deg, transparent, #000 22%, transparent 82%);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, transparent 82%);
   }
   .hero__scrim {
     position: absolute;
@@ -210,29 +246,55 @@ const stats = [
     .hero__title {
       max-width: 100%;
     }
+    .hero__still::after {
+      inset: 62% 0 0;
+      background-size: 34px 34px;
+    }
     .hero__scrim {
       background:
         radial-gradient(ellipse 120% 55% at 50% 62%, rgba(4, 7, 13, 0.92), transparent 78%),
         linear-gradient(180deg, rgba(4, 7, 13, 0.9) 0%, rgba(4, 7, 13, 0.55) 30%, rgba(4, 7, 13, 0.8) 72%, var(--bg) 100%);
     }
   }
+
+  /* The heavy scrim exists to keep text legible over a busy 3D render. With
+     the static backdrop it only needs to be a light veil. */
+  .hero.no-webgl .hero__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(4, 7, 13, 0.62) 0%,
+      rgba(4, 7, 13, 0.18) 34%,
+      rgba(4, 7, 13, 0.55) 78%,
+      var(--bg) 100%
+    );
+  }
 </style>
 
 <script>
-  import { initHero } from '../scripts/hero3d.js';
+  import { deviceTier, onFirstIntent } from '../scripts/scene-gate.js';
 
   const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
-    const start = () => {
+  const hero = document.querySelector('.hero');
+  const tier = deviceTier();
+
+  if (!canvas || tier === 'off') {
+    // Phones, low-power hardware, metered data, reduced motion: the Three.js
+    // chunk is never requested. The CSS hero is the finished design.
+    canvas?.remove();
+    hero?.classList.add('no-webgl');
+  } else {
+    // Capable desktop. Download + build the scene on the first real gesture so
+    // the ~1 s construction task never lands inside the page's load window.
+    onFirstIntent(async () => {
       try {
-        initHero(canvas);
+        const { initHero } = await import('../scripts/hero3d.js');
+        initHero(canvas, tier);
+        canvas.classList.add('is-live');
       } catch (err) {
         console.warn('WebGL scene unavailable', err);
-        canvas.style.display = 'none';
-        document.querySelector('.hero')?.classList.add('no-webgl');
+        canvas.remove();
+        hero?.classList.add('no-webgl');
       }
-    };
-    if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 600 });
-    else setTimeout(start, 60);
+    });
   }
 </script>
