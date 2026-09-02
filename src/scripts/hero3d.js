@@ -8,9 +8,20 @@ const SIGNAL = new THREE.Color('#3ce7c4');
 const VIOLET = new THREE.Color('#8b6cff');
 const DEEP = new THREE.Color('#0a1526');
 
-export function initHero(canvas) {
+/**
+ * @param {HTMLCanvasElement} canvas
+ * @param {'lite'|'full'} tier  Quality budget chosen by scene-gate.js.
+ *                              'off' never reaches this module.
+ */
+export function initHero(canvas, tier = 'full') {
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mobile = window.innerWidth < 760;
+  // `lite` = capable but modest desktop (4-7 cores, or < 1440px wide).
+  // Kept as `mobile` internally because it drives the same lower-cost layout.
+  const mobile = tier !== 'full';
+  // Cap the animation to 40 fps on lite hardware: each frame does an O(count)
+  // matrix rebuild plus a multi-pass bloom, so halving frame count halves the
+  // main-thread cost without a visible change in the motion.
+  const frameBudget = mobile ? 1 / 40 : 0;
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -18,7 +29,7 @@ export function initHero(canvas) {
     alpha: true,
     powerPreference: 'high-performance',
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.25 : 1.75));
   renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
@@ -210,7 +221,7 @@ export function initHero(canvas) {
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
     new THREE.Vector2(canvas.clientWidth, canvas.clientHeight),
-    mobile ? 0.55 : 0.78,
+    mobile ? 0.5 : 0.78,
     0.75,
     0.14
   );
@@ -251,6 +262,13 @@ export function initHero(canvas) {
   /* ---------------- Loop ---------------- */
   const clock = new THREE.Clock();
   let raf = 0;
+  let acc = 0;
+
+  // Hoisted out of the loop — these were four fresh allocations per frame.
+  const m = new THREE.Matrix4();
+  const pos = new THREE.Vector3();
+  const scl = new THREE.Vector3();
+  const q = new THREE.Quaternion();
 
   const tick = () => {
     raf = requestAnimationFrame(tick);
@@ -259,15 +277,17 @@ export function initHero(canvas) {
     const t = clock.getElapsedTime();
     const dt = Math.min(clock.getDelta(), 0.05);
 
+    if (frameBudget) {
+      acc += dt;
+      if (acc < frameBudget) return;
+      acc = 0;
+    }
+
     pointer.x += (pointer.tx - pointer.x) * 0.045;
     pointer.y += (pointer.ty - pointer.y) * 0.045;
 
     if (!reduced) {
       // Breathing racks
-      const m = new THREE.Matrix4();
-      const pos = new THREE.Vector3();
-      const scl = new THREE.Vector3();
-      const q = new THREE.Quaternion();
       for (let n = 0; n < count; n += 1) {
         racks.getMatrixAt(n, m);
         m.decompose(pos, q, scl);
