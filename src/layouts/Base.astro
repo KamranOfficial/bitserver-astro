@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const {
+  title = 'BitsServer IT Lab — AI, Cloud & Digital Innovation',
+  description = 'BitsServer IT Lab engineers AI automation, cloud infrastructure, NVMe VPS hosting, web and mobile products, and zero-trust security. Multan · Abu Dhabi.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#04070d" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://bitsserver.com/" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2304070d'/%3E%3Cpath d='M16 6.5 25 11.4v9.2L16 25.5 7 20.6v-9.2L16 6.5Z' stroke='%233ce7c4' stroke-width='1.6' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='%233ce7c4'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=satoshi@400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'BitsServer IT Lab',
+        url: 'https://bitsserver.com',
+        description:
+          'AI automation, cloud infrastructure, VPS hosting, web & mobile development, cybersecurity and IT consulting.',
+        address: [
+          { '@type': 'PostalAddress', addressLocality: 'Multan', addressCountry: 'PK' },
+          { '@type': 'PostalAddress', addressLocality: 'Abu Dhabi', addressCountry: 'AE' },
+        ],
+      })}
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Nav />
+    <main id="main"><slot /></main>
+    <Footer />
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+        el.style.setProperty('--reveal-delay', `${(i % 4) * 90}ms`);
+        io.observe(el);
+      });
+    </script>
+  </body>
+</html>

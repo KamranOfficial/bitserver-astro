@@ -1,0 +1,17 @@
+---
+import Legal from '../../layouts/Legal.astro';
+import { LEGAL_PAGES, LEGAL_UPDATED } from '../../data/legal.js';
+
+const bodies = import.meta.glob('../../content/legal/*.html', { query: '?raw', import: 'default', eager: true });
+
+export function getStaticPaths() {
+  return LEGAL_PAGES.map((p) => ({ params: { slug: p.slug }, props: { page: p } }));
+}
+
+const { page } = Astro.props;
+const body = bodies[`../../content/legal/${page.slug}.html`];
+---
+
+<Legal title={page.title} lead={page.lead} slug={page.slug} updated={LEGAL_UPDATED}>
+  <Fragment set:html={body} />
+</Legal>

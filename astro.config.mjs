@@ -1,9 +1,24 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
+import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
+// Static output — deploys to Cloudflare Workers/Pages as a static asset bundle.
 export default defineConfig({
-	site: "https://www.bitsserver.com",
-	integrations: [sitemap()],
+  site: 'https://bitsserver.com',
+  output: 'static',
+  build: {
+    // /legal/privacy-policy.html — matches the existing bitsserver.com sitemap
+    format: 'file',
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            three: ['three'],
+          },
+        },
+      },
+    },
+  },
 });

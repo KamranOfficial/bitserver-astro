@@ -1,0 +1,138 @@
+---
+const tools = [
+  { t: 'DNS Lookup', d: 'Resolve A, AAAA, MX, TXT and NS records from multiple resolvers.', s: 'Live' },
+  { t: 'Uptime Check', d: 'Ping any endpoint from our edge and see status, latency and TLS expiry.', s: 'Live' },
+  { t: 'Server Diagnostics', d: 'Header inspection, redirect chains, compression and cache audit.', s: 'Live' },
+  { t: 'Subnet Calculator', d: 'CIDR ranges, usable hosts and broadcast addresses at a glance.', s: 'Soon' },
+  { t: 'SSL Inspector', d: 'Certificate chain, cipher suite and protocol support report.', s: 'Soon' },
+  { t: 'Speed Test', d: 'Measure TTFB and full-load time from several global regions.', s: 'Soon' },
+];
+---
+
+<section class="section tools" id="tools">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <span class="eyebrow">Handy utilities, on the house</span>
+      <h2 class="sec-title">Free browser-based IT tools.<br />No signup, no catch.</h2>
+      <p class="lede">
+        A growing library of utilities we built for our own engineers and left open for everyone
+        else. Everything runs in the browser or on our edge.
+      </p>
+    </header>
+
+    <div class="tool-grid">
+      {
+        tools.map((t) => (
+          <a class="tool" href="#contact" data-reveal data-state={t.s}>
+            <span class="tool__beam" aria-hidden="true"></span>
+            <div class="tool__head">
+              <h3>{t.t}</h3>
+              <span class={`badge badge--${t.s.toLowerCase()}`}>{t.s}</span>
+            </div>
+            <p>{t.d}</p>
+            <span class="tool__arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 8h11M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .tools {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 100%);
+  }
+  .sec-head {
+    max-width: 720px;
+    margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
+  }
+  .sec-title {
+    font-size: var(--text-2xl);
+    margin: 1rem 0 1.1rem;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .tool {
+    position: relative;
+    background: var(--bg-1);
+    padding: 1.7rem 1.5rem 1.9rem;
+    display: block;
+    overflow: hidden;
+    transition: background 0.35s var(--ease);
+  }
+  .tool:hover {
+    background: var(--bg-2);
+  }
+  .tool__beam {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--signal), transparent);
+    transform: scaleY(0);
+    transition: transform 0.45s var(--ease);
+  }
+  .tool:hover .tool__beam {
+    transform: scaleY(1);
+  }
+  .tool__head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.55rem;
+  }
+  .tool h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .tool p {
+    color: var(--ink-2);
+    font-size: var(--text-sm);
+    max-width: 38ch;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid;
+  }
+  .badge--live {
+    color: var(--signal);
+    border-color: rgba(60, 231, 196, 0.4);
+    background: rgba(60, 231, 196, 0.08);
+  }
+  .badge--soon {
+    color: var(--ink-3);
+    border-color: var(--line-strong);
+  }
+  .tool__arrow {
+    position: absolute;
+    right: 1.4rem;
+    bottom: 1.5rem;
+    color: var(--ink-3);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.35s, transform 0.35s var(--ease), color 0.35s;
+  }
+  .tool:hover .tool__arrow {
+    opacity: 1;
+    transform: none;
+    color: var(--signal);
+  }
+</style>

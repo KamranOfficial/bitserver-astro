@@ -1,0 +1,153 @@
+---
+const steps = [
+  {
+    n: '01',
+    t: 'Discovery & Strategy',
+    d: 'We audit your current stack and map a roadmap tied to real business outcomes — not a shopping list of technology.',
+    out: ['Stack audit', 'Outcome roadmap', 'Cost model'],
+  },
+  {
+    n: '02',
+    t: 'Architecture & Design',
+    d: 'Systems designed for scale and security from day one. Security is architected in, never bolted on later.',
+    out: ['Reference architecture', 'Threat model', 'Design system'],
+  },
+  {
+    n: '03',
+    t: 'Build & Integrate',
+    d: 'Agile delivery with weekly checkpoints, so you see working progress instead of status promises.',
+    out: ['Weekly demos', 'CI/CD pipelines', 'Integration tests'],
+  },
+  {
+    n: '04',
+    t: 'Launch & Support',
+    d: '24/7 monitoring and a support team that responds before small issues become outages.',
+    out: ['24/7 monitoring', 'Runbooks', 'SLA-backed support'],
+  },
+];
+---
+
+<section class="section process" id="process">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <span class="eyebrow">From idea to production</span>
+      <h2 class="sec-title">A process you can watch,<br />week by week.</h2>
+    </header>
+
+    <ol class="steps">
+      {
+        steps.map((s) => (
+          <li class="step" data-reveal>
+            <div class="step__rail" aria-hidden="true">
+              <span class="step__node"></span>
+            </div>
+            <div class="step__body">
+              <span class="step__n mono">Phase {s.n}</span>
+              <h3 class="step__t">{s.t}</h3>
+              <p class="step__d">{s.d}</p>
+              <ul class="step__out">
+                {s.out.map((o) => (
+                  <li>
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="m3 8.4 3.1 3.1L13 4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    {o}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--bg);
+  }
+  .sec-head {
+    max-width: 720px;
+    margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
+  }
+  .sec-title {
+    font-size: var(--text-2xl);
+    margin-top: 1rem;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+    gap: 0;
+  }
+  .step {
+    position: relative;
+    padding: 0 1.5rem 0 0;
+  }
+  .step__rail {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+    margin-bottom: 1.6rem;
+  }
+  .step__node {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    transform: translate(0, -50%);
+    background: var(--bg);
+    border: 1px solid var(--signal);
+    box-shadow: 0 0 0 4px rgba(60, 231, 196, 0.09);
+  }
+  .step:hover .step__node {
+    background: var(--signal);
+    box-shadow: 0 0 18px 2px rgba(60, 231, 196, 0.55);
+  }
+  .step__n {
+    color: var(--signal);
+    letter-spacing: 0.18em;
+  }
+  .step__t {
+    font-size: var(--text-lg);
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0.5rem 0 0.6rem;
+  }
+  .step__d {
+    color: var(--ink-2);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+  .step__out {
+    list-style: none;
+    padding: 0;
+    margin: 1.1rem 0 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .step__out li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+  .step__out svg {
+    color: var(--signal);
+    flex: none;
+  }
+
+  @media (max-width: 720px) {
+    .step {
+      padding: 0 0 1.8rem;
+    }
+  }
+</style>

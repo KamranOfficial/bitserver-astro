@@ -1,0 +1,203 @@
+---
+import Logo from './Logo.astro';
+
+const links = [
+  { href: '/#services', label: 'Services' },
+  { href: '/#infrastructure', label: 'Infrastructure' },
+  { href: '/#process', label: 'Process' },
+  { href: '/#tools', label: 'Free Tools' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+
+<header class="nav" id="nav">
+  <div class="nav__inner wrap">
+    <a href="/" class="nav__brand" aria-label="BitsServer IT Lab — home">
+      <Logo />
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav__cta">
+      <span class="nav__status" aria-hidden="true"></span>
+      <span class="nav__uptime mono">99.9% uptime</span>
+      <a href="/contact" class="btn btn--primary btn--sm">Start a project</a>
+    </div>
+
+    <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false" id="burger">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__drawer" id="drawer" hidden>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a href="/contact" class="drawer__cta">Start a project</a>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease), backdrop-filter 0.4s;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.is-stuck {
+    background: rgba(4, 7, 13, 0.72);
+    backdrop-filter: blur(16px) saturate(140%);
+    border-bottom-color: var(--line);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-6);
+    height: 72px;
+  }
+  .nav__brand {
+    margin-right: auto;
+  }
+  .nav__links {
+    display: flex;
+    gap: clamp(1rem, 2.2vw, 2rem);
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+  }
+  .nav__links a {
+    position: relative;
+    padding-block: 4px;
+    transition: color 0.25s;
+  }
+  .nav__links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+  }
+  .nav__links a:hover {
+    color: var(--ink);
+  }
+  .nav__links a:hover::after {
+    transform: scaleX(1);
+  }
+  .nav__cta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav__status {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 0 rgba(60, 231, 196, 0.6);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 8px rgba(60, 231, 196, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(60, 231, 196, 0);
+    }
+  }
+  .nav__uptime {
+    color: var(--ink-3);
+  }
+  .btn--sm {
+    padding: 0.6rem 1.1rem;
+    font-size: var(--text-xs);
+  }
+  .nav__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+  }
+  .nav__burger span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    margin-inline: auto;
+    background: var(--ink);
+    transition: transform 0.35s var(--ease), opacity 0.2s;
+  }
+  .nav__burger[aria-expanded='true'] span:first-child {
+    transform: translateY(3.75px) rotate(45deg);
+  }
+  .nav__burger[aria-expanded='true'] span:last-child {
+    transform: translateY(-3.75px) rotate(-45deg);
+  }
+  .nav__drawer[hidden] {
+    display: none;
+  }
+  .nav__drawer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem clamp(1.25rem, 4vw, 2.5rem) 1.75rem;
+    background: rgba(6, 10, 18, 0.96);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__drawer a {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-2);
+  }
+  .drawer__cta {
+    margin-top: 0.75rem;
+    border: 0 !important;
+    color: var(--signal) !important;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .nav__links,
+    .nav__uptime,
+    .nav__status,
+    .nav__cta .btn {
+      display: none;
+    }
+    .nav__burger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+
+  const onScroll = () => nav?.classList.toggle('is-stuck', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  burger?.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    if (drawer) drawer.hidden = open;
+  });
+
+  drawer?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      burger?.setAttribute('aria-expanded', 'false');
+      if (drawer) drawer.hidden = true;
+    })
+  );
+</script>
