@@ -1,0 +1,167 @@
+---
+import Logo from './Logo.astro';
+
+import { LEGAL_PAGES, CONTACT } from '../data/legal.js';
+
+const cols = [
+  {
+    h: 'Services',
+    items: [
+      { label: 'AI Solutions', href: '/#services' },
+      { label: 'Cloud Computing', href: '/#services' },
+      { label: 'VPS Hosting', href: '/#services' },
+      { label: 'Web Development', href: '/#services' },
+      { label: 'Mobile Apps', href: '/#services' },
+    ],
+  },
+  {
+    h: 'Company',
+    items: [
+      { label: 'Infrastructure', href: '/#infrastructure' },
+      { label: 'Process', href: '/#process' },
+      { label: 'Free Tools', href: '/#tools' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'WhatsApp', href: CONTACT.whatsapp },
+    ],
+  },
+  {
+    h: 'Legal',
+    items: [
+      { label: 'Legal Hub', href: '/legal/index.html' },
+      ...LEGAL_PAGES.map((p) => ({ label: p.short, href: `/legal/${p.slug}.html` })),
+    ],
+  },
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <Logo />
+        <p>
+          Full-stack IT solutions engineered for speed, security and scale. From Multan to Abu Dhabi
+          and beyond.
+        </p>
+        <div class="foot__status">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="mono">All systems operational</span>
+        </div>
+      </div>
+
+      {
+        cols.map((c) => (
+          <nav class="foot__col" aria-label={c.h}>
+            <h3 class="mono">{c.h}</h3>
+            <ul>
+              {c.items.map((i) => (
+                <li>
+                  <a href={i.href}>{i.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+
+    <hr class="hr-glow" />
+
+    <div class="foot__base">
+      <span>© {year} BitsServer IT Lab. All rights reserved.</span>
+      <span class="foot__contact">
+        <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+        <span aria-hidden="true">·</span>
+        <a href={`tel:${CONTACT.phoneRaw}`}>{CONTACT.phone}</a>
+      </span>
+      <span class="mono">Built with Astro · Deployed on Cloudflare</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    background: var(--bg-1);
+    border-top: 1px solid var(--line);
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+  }
+  .foot__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    padding-bottom: 2.5rem;
+  }
+  .foot__brand p {
+    margin-top: 1rem;
+    max-width: 34ch;
+    color: var(--ink-3);
+    font-size: var(--text-sm);
+  }
+  .foot__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    color: var(--ink-3);
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 10px var(--signal);
+  }
+  .foot__col h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+    margin-bottom: 0.9rem;
+  }
+  .foot__col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .foot__col a {
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    transition: color 0.25s;
+  }
+  .foot__col a:hover {
+    color: var(--signal);
+  }
+  .foot__base {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding-top: 1.5rem;
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+
+  .foot__contact {
+    display: inline-flex;
+    gap: 0.45rem;
+    color: var(--ink-3);
+  }
+  .foot__contact a {
+    color: var(--ink-2);
+    transition: color 0.25s;
+  }
+  .foot__contact a:hover {
+    color: var(--signal);
+  }
+
+  @media (max-width: 820px) {
+    .foot__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

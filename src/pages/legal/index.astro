@@ -1,205 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<script>(function(){try{var t=localStorage.getItem('bitsserver-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
-<title>Legal Center — BitsServer IT Lab</title>
-<meta name="description" content="Browse BitsServer IT Lab's Privacy Policy, Terms and Conditions, Cookie Policy, Disclaimer, DMCA, Refund Policy, and Accessibility Statement." />
-<meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://www.bitsserver.com/legal/index.html" />
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-<meta property="og:title" content="Legal Center — BitsServer IT Lab" />
-<meta property="og:description" content="Browse BitsServer IT Lab's Privacy Policy, Terms and Conditions, Cookie Policy, Disclaimer, DMCA, Refund Policy, and Accessibility Statement." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.bitsserver.com/legal/index.html" />
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/css/style.css?v=20260810" />
-</head>
-<body>
-<div id="scroll-progress"></div>
-<div id="cursor-glow"></div>
+---
+import Legal from '../../layouts/Legal.astro';
+import { LEGAL_PAGES, LEGAL_UPDATED, CONTACT } from '../../data/legal.js';
+---
 
-<!-- ============================================================
-     includes/header.html
-     Canonical site header. Edit ONLY this file to change nav
-     sitewide — build.py stitches it into every page at build time.
-     All links are root-relative ("/...") so this fragment works
-     unmodified no matter how deep the page lives (/, /tools/, /legal/).
-     ============================================================ -->
-<header id="site-header">
-  <div class="container nav-wrap">
-    <a class="logo" href="/">
-      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" stroke-width="2"/></svg></span>
-      BitsServer<span class="neon-text">&nbsp;IT&nbsp;Lab</span>
-    </a>
-
-    <input class="nav-check" id="nav-check" type="checkbox" aria-label="Toggle menu" />
-
-    <nav id="main-nav">
-      <ul>
-        <li><a href="/#hero">Home</a></li>
-        <li><a href="/#services">Services</a></li>
-        <li><a href="/#tech-stack">Technology</a></li>
-        <li><a href="/#highlights">About</a></li>
-        <li><a href="/tools/">Free Tools</a></li>
-        <li><a href="/#testimonials">Clients</a></li>
-        <li><a href="/#contact">Contact</a></li>
-      </ul>
-    </nav>
-
-    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Toggle color theme" title="Toggle color theme">
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.85 1.85M17.55 17.55l1.85 1.85M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.85-1.85M17.55 6.45l1.85-1.85" stroke-linecap="round" stroke-width="1.8"/></svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.7A8.5 8.5 0 1 1 9.3 3.5a7 7 0 0 0 11.2 11.2Z" stroke-linejoin="round" stroke-width="1.8"/></svg>
-    </button>
-    <a class="btn btn-primary nav-cta" href="/#contact" style="padding:10px 22px;font-size:13px;">Get Started</a>
-    <label class="nav-burger" for="nav-check" aria-label="Open menu"><span></span><span></span><span></span></label>
-  </div>
-</header>
-
-
-<main>
-<section class="legal-banner">
-<div class="container">
-<span class="section-tag">Legal</span>
-<h1>Legal <span class="neon-text">Center</span></h1>
-<p>Every policy that governs your use of BitsServer IT Lab's website and services, all in one place.</p>
-<div class="legal-meta">
-<span class="glass legal-chip"><span class="dot"></span> Last updated: August 9, 2026</span>
-</div>
-</div>
-</section>
-
-<section id="legal-content">
-<div class="container">
-<div class="legal-index-grid">
-<a class="legal-index-card glass reveal" href="/legal/privacy-policy.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="m9 12 2 2 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/></svg></div>
-<h3>Privacy Policy</h3>
-<p>How BitsServer IT Lab collects, uses, and protects your personal information.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/cookie-policy.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="14" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="10" cy="15" r="1" fill="currentColor" stroke="none"/></svg></div>
-<h3>Cookie Policy</h3>
-<p>How we use cookies and similar technologies across our website.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/terms-and-conditions.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="M9 9h6M9 13h6M9 17h4" stroke-linecap="round" stroke-width="1.6"/></svg></div>
-<h3>Terms and Conditions</h3>
-<p>The rules and terms that govern your use of our website and services.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/disclaimer.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 2 20h20L12 3Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="M12 10v4" stroke-linecap="round" stroke-width="1.6"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></div>
-<h3>Disclaimer</h3>
-<p>Limitations on the information and services we provide.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/dmca.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="M12 8v5M12 15.5v.01" stroke-linecap="round" stroke-width="1.6"/></svg></div>
-<h3>DMCA Policy</h3>
-<p>Our copyright infringement notice and takedown procedure.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/refund-policy.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 0 3-6.7" stroke-linecap="round" stroke-width="1.6"/><path d="M3 4v5h5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/><path d="M12 8v4l3 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/></svg></div>
-<h3>Refund Policy</h3>
-<p>How refunds, cancellations, and billing disputes are handled.</p>
-</a><a class="legal-index-card glass reveal" href="/legal/accessibility.html">
-<div class="legal-index-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="5" r="1.6" fill="currentColor" stroke="none"/><path d="M5 8.5 12 10l7-1.5M12 10v4M9 20l3-6 3 6M9 12l-2 3M15 12l2 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6"/></svg></div>
-<h3>Accessibility Statement</h3>
-<p>Our commitment to making this website usable by everyone.</p>
-</a>
-</div>
-</div>
-</section>
-</main>
-
-<!-- ============ FOOTER ============ -->
-<!-- ============================================================
-     includes/footer.html
-     Canonical site footer. Edit ONLY this file to change footer
-     links/addresses sitewide — build.py stitches it into every
-     page at build time. All links are root-relative ("/...").
-     ============================================================ -->
-<footer id="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-
-      <div>
-        <a class="logo" href="/" style="margin-bottom:14px;">
-          <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round" stroke-width="2"/></svg></span>
-          BitsServer<span class="neon-text">&nbsp;IT&nbsp;Lab</span>
+<Legal
+  title="Legal Center"
+  lead="Every policy that governs your use of BitsServer IT Lab's website and services, all in one place."
+  slug="index"
+  updated={LEGAL_UPDATED}
+>
+  <div class="hub">
+    {
+      LEGAL_PAGES.map((p) => (
+        <a class="hub__card" href={`/legal/${p.slug}.html`}>
+          <span class="hub__num mono">{p.num}</span>
+          <h2>{p.title}</h2>
+          <p>{p.blurb}</p>
+          <span class="hub__go mono">
+            Read <span aria-hidden="true">→</span>
+          </span>
         </a>
-        <p>Delivering AI automation, cloud infrastructure, and digital transformation for businesses worldwide.</p>
-
-        <!-- Office locations -->
-        <ul class="footer-address-list">
-          <li>Headquarters: Multan, Pakistan</li>
-          <li>Zonal Office: Abu Dhabi, UAE</li>
-        </ul>
-
-        <div class="social-row">
-          <a aria-label="Facebook" href="https://www.facebook.com/bitsserver" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3a4 4 0 0 0-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2a1 1 0 0 1 1-1Z" stroke-linejoin="round" stroke-width="1.4"/></svg></a>
-          <a aria-label="X (Twitter)" href="https://www.x.com/bitsserver" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16M20 4 4 20" stroke-linecap="round" stroke-width="1.6"/></svg></a>
-          <a aria-label="LinkedIn" href="https://www.linkedin.com/bitsserver" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.4"/><path d="M8 11v5M8 8v.01M12 16v-3a2 2 0 0 1 4 0v3" stroke-linecap="round" stroke-width="1.4"/></svg></a>
-          <a aria-label="Instagram" href="https://www.instagram.com/bitsserver" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="5" stroke-width="1.4"/><circle cx="12" cy="12" r="3.5" stroke-width="1.4"/><path d="M17 7h.01" stroke-linecap="round" stroke-width="1.6"/></svg></a>
-        </div>
-      </div>
-
-      <div>
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="/#hero">Home</a></li>
-          <li><a href="/#services">Services</a></li>
-          <li><a href="/about.html">About Us</a></li>
-          <li><a href="/tools/">Free Tools</a></li>
-          <li><a href="/contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Services</h4>
-        <ul>
-          <li><a href="/#services">AI Solutions</a></li>
-          <li><a href="/#services">Cloud Computing</a></li>
-          <li><a href="/#services">Cybersecurity</a></li>
-          <li><a href="/#services">IT Consulting</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="/legal">Legal Center</a></li>
-          <li><a href="/legal/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="/legal/cookie-policy.html">Cookie Policy</a></li>
-          <li><a href="/legal/terms-and-conditions.html">Terms and Conditions</a></li>
-          <li><a href="/legal/disclaimer.html">Disclaimer</a></li>
-          <li><a href="/legal/dmca.html">DMCA</a></li>
-          <li><a href="/legal/refund-policy.html">Refund Policy</a></li>
-          <li><a href="/legal/accessibility.html">Accessibility</a></li>
-        </ul>
-      </div>
-
-     
-
-    </div>
-
-    <div class="footer-bottom">
-      <span>&copy; <span id="current-year">2026</span> <a href="https://bitsserver.com/" >BitsServer IT Lab.</a> All rights reserved.</span>
-      <div class="theme-selector" role="group" aria-label="Color theme">
-        <button type="button" class="theme-option" data-theme-option="system" title="Match system theme">System</button>
-        <button type="button" class="theme-option" data-theme-option="light" title="Light theme">Light</button>
-        <button type="button" class="theme-option" data-theme-option="dark" title="Dark theme">Dark</button>
-      </div>
-      <span> Built for BitsServer.com <br> Developed by Kamran Ahmad </span>
-    </div>
+      ))
+    }
   </div>
-</footer>
 
-<button aria-label="Back to top" id="back-to-top">
-  <svg viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-</button>
+  <div class="hub__note">
+    <p>
+      Questions about any of these policies? Write to
+      <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> and our team will get back to you within
+      one business day.
+    </p>
+  </div>
+</Legal>
 
-
-<script is:inline src="/js/main.js?v=20260811"></script>
-  <!-- ============ FOOTER ============ -->
-
-</body>
-</html>
+<style>
+  .hub {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .hub__card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    padding: 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: linear-gradient(160deg, rgba(17, 26, 45, 0.7), rgba(7, 11, 20, 0.5));
+    overflow: hidden;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .hub__card::after {
+    content: '';
+    position: absolute;
+    inset: auto -30% -60% auto;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(closest-side, rgba(60, 231, 196, 0.22), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+  }
+  .hub__card:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-3px);
+  }
+  .hub__card:hover::after {
+    opacity: 1;
+  }
+  .hub__num {
+    font-size: var(--text-xs);
+    color: var(--signal-dim);
+    letter-spacing: 0.14em;
+  }
+  .hub__card h2 {
+    font-size: var(--text-base) !important;
+    margin: 0.6rem 0 0.4rem !important;
+  }
+  .hub__card p {
+    font-size: var(--text-sm);
+    color: var(--ink-3);
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+  .hub__go {
+    font-size: var(--text-xs);
+    color: var(--signal);
+    letter-spacing: 0.08em;
+  }
+  .hub__note {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .hub__note p {
+    font-size: var(--text-sm);
+    color: var(--ink-3);
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+const metrics = [
+  { n: '99.9%', l: 'Uptime SLA', s: 'Monitored 24/7' },
+  { n: 'NVMe', l: 'Storage tier', s: 'Sub-ms I/O' },
+  { n: '24', l: 'Countries served', s: 'Multan → Abu Dhabi → beyond' },
+  { n: '<15m', l: 'Incident response', s: 'Before it becomes an outage' },
+];
+
+const stack = [
+  'AWS',
+  'Microsoft Azure',
+  'Google Cloud',
+  'Cloudflare',
+  'Kubernetes',
+  'Terraform',
+  'PostgreSQL',
+  'Docker',
+  'Astro',
+  'Next.js',
+  'Zero-Trust',
+  'Grafana',
+];
+---
+
+<section class="section infra" id="infrastructure">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="wrap infra__grid">
+    <div class="infra__copy">
+      <span class="eyebrow" data-reveal>Global infrastructure</span>
+      <h2 class="sec-title" data-reveal>Edge-close, always on,<br />everywhere you operate.</h2>
+      <p class="lede" data-reveal>
+        Auto-scaling infrastructure across AWS, Azure and Google Cloud, fronted by NVMe-backed
+        virtual servers and zero-trust access control. Traffic routes to the closest healthy region;
+        monitoring catches drift before your users feel it.
+      </p>
+
+      <dl class="metrics" data-reveal>
+        {
+          metrics.map((m) => (
+            <div class="metric">
+              <dt>{m.n}</dt>
+              <dd>
+                <strong>{m.l}</strong>
+                <span>{m.s}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="infra__globe" data-reveal>
+      <canvas id="globe-canvas" aria-label="Animated globe showing BitsServer network regions"></canvas>
+      <div class="globe__ring" aria-hidden="true"></div>
+      <span class="globe__tag mono">live network · 14 regions</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="ticker" data-reveal>
+      <span class="ticker__label mono">Technology we trust</span>
+      <div class="ticker__view">
+        <div class="ticker__row">
+          {[...stack, ...stack].map((s) => <span class="chip">{s}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .infra {
+    position: relative;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-1) 42%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  .infra__grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  .sec-title {
+    font-size: var(--text-2xl);
+    margin: 1rem 0 1.1rem;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem 1.8rem;
+    margin: 2.4rem 0 0;
+  }
+  .metric dt {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1.1rem + 1.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--signal);
+  }
+  .metric dd {
+    margin: 0.15rem 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .metric strong {
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+  .metric span {
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+
+  .infra__globe {
+    position: relative;
+    aspect-ratio: 1;
+    min-height: 340px;
+  }
+  #globe-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .globe__ring {
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    border: 1px dashed rgba(60, 231, 196, 0.18);
+    animation: spin 46s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .globe__tag {
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    color: var(--ink-3);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    background: rgba(4, 7, 13, 0.7);
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+  }
+
+  .ticker {
+    margin-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding-block: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .ticker__label {
+    flex: none;
+    color: var(--ink-3);
+  }
+  .ticker__view {
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .ticker__row {
+    display: flex;
+    gap: 0.55rem;
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+  .ticker:hover .ticker__row {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .chip {
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  @media (max-width: 900px) {
+    .infra__grid {
+      grid-template-columns: 1fr;
+    }
+    .infra__globe {
+      order: -1;
+      min-height: 300px;
+    }
+    .ticker {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+    .ticker__view {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('globe-canvas');
+  if (canvas) {
+    const io = new IntersectionObserver(
+      async (entries) => {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        try {
+          const { initGlobe } = await import('../scripts/globe3d.js');
+          initGlobe(canvas);
+        } catch (err) {
+          console.warn('Globe unavailable', err);
+          canvas.style.display = 'none';
+        }
+      },
+      { rootMargin: '250px' }
+    );
+    io.observe(canvas);
+  }
+</script>

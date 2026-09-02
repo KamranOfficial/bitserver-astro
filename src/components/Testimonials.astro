@@ -1,0 +1,126 @@
+---
+const quotes = [
+  {
+    q: 'BitsServer migrated our entire stack to the cloud with zero downtime. Sharp, fast, and genuinely cares about outcomes.',
+    a: 'Operations Director',
+    c: 'Logistics group',
+  },
+  {
+    q: 'The AI automation they built cut our support ticket volume by 40% in the first month. Incredible ROI.',
+    a: 'Head of Customer Experience',
+    c: 'SaaS platform',
+  },
+  {
+    q: 'Our VPS infrastructure has never been more stable. Their monitoring caught issues before we even noticed.',
+    a: 'CTO',
+    c: 'Fintech startup',
+  },
+];
+---
+
+<section class="section quotes">
+  <div class="wrap">
+    <header class="sec-head" data-reveal>
+      <span class="eyebrow">Client signal</span>
+      <h2 class="sec-title">Outcomes, not deliverables.</h2>
+    </header>
+
+    <div class="quote-grid">
+      {
+        quotes.map((x, i) => (
+          <figure class="quote" data-reveal>
+            <span class="quote__mark" aria-hidden="true">“</span>
+            <blockquote>{x.q}</blockquote>
+            <figcaption>
+              <span class="quote__avatar" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span>
+                <strong>{x.a}</strong>
+                <em>{x.c}</em>
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .quotes {
+    background: var(--bg-1);
+    border-block: 1px solid var(--line);
+  }
+  .sec-head {
+    margin-bottom: clamp(2.2rem, 4vw, 3.2rem);
+  }
+  .sec-title {
+    font-size: var(--text-2xl);
+    margin-top: 1rem;
+  }
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.1rem;
+  }
+  .quote {
+    position: relative;
+    margin: 0;
+    padding: 2.2rem 1.6rem 1.6rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01));
+    transition: transform 0.4s var(--ease), border-color 0.4s;
+  }
+  .quote:hover {
+    transform: translateY(-5px);
+    border-color: rgba(60, 231, 196, 0.35);
+  }
+  .quote__mark {
+    position: absolute;
+    top: 0.5rem;
+    left: 1.4rem;
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    line-height: 1;
+    color: rgba(60, 231, 196, 0.35);
+  }
+  blockquote {
+    margin: 0 0 1.4rem;
+    font-size: var(--text-lg);
+    line-height: 1.55;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+  figcaption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+  figcaption span {
+    display: flex;
+    flex-direction: column;
+  }
+  figcaption strong {
+    font-size: var(--text-sm);
+  }
+  figcaption em {
+    font-style: normal;
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+  .quote__avatar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex: none;
+    border-radius: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--signal);
+    background: rgba(60, 231, 196, 0.09);
+    border: 1px solid rgba(60, 231, 196, 0.25);
+  }
+</style>

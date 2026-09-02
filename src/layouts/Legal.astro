@@ -1,0 +1,204 @@
+---
+import Base from './Base.astro';
+import { LEGAL_PAGES } from '../data/legal.js';
+
+const { title, lead, slug, updated = 'August 9, 2026' } = Astro.props;
+---
+
+<Base title={`${title} — BitsServer IT Lab`} description={lead}>
+  <section class="lbanner">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="lbanner__glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Legal</span>
+      <h1 class="lbanner__title">{title}</h1>
+      <p class="lede">{lead}</p>
+      <span class="chip mono"><span class="chip__dot" aria-hidden="true"></span> Last updated: {updated}</span>
+    </div>
+  </section>
+
+  <section class="lbody">
+    <div class="wrap lbody__grid">
+      <aside class="lnav panel">
+        <h2 class="mono lnav__h">Legal documents</h2>
+        <nav aria-label="Legal documents">
+          <a href="/legal/index.html" class:list={[{ on: slug === 'index' }]}>Legal Hub</a>
+          {
+            LEGAL_PAGES.map((p) => (
+              <a href={`/legal/${p.slug}.html`} class:list={[{ on: slug === p.slug }]}>
+                {p.short}
+              </a>
+            ))
+          }
+        </nav>
+        <a href="/contact" class="btn btn--primary btn--sm lnav__cta">Talk to us</a>
+      </aside>
+
+      <article class="prose panel">
+        <slot />
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lbanner {
+    position: relative;
+    padding-block: clamp(8rem, 14vw, 11rem) clamp(2.5rem, 5vw, 4rem);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .lbanner__glow {
+    position: absolute;
+    inset: -40% 40% auto -20%;
+    height: 130%;
+    background: radial-gradient(closest-side, rgba(60, 231, 196, 0.16), transparent 70%);
+    pointer-events: none;
+  }
+  .lbanner .wrap {
+    position: relative;
+  }
+  .lbanner__title {
+    font-size: var(--text-2xl);
+    margin: 1rem 0 0.9rem;
+    letter-spacing: -0.02em;
+  }
+  .lbanner .lede {
+    max-width: 62ch;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(11, 17, 32, 0.6);
+    font-size: var(--text-xs);
+    color: var(--ink-3);
+  }
+  .chip__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 10px var(--signal);
+  }
+
+  .lbody {
+    padding-block: clamp(3rem, 6vw, 5rem) clamp(4rem, 8vw, 7rem);
+  }
+  .lbody__grid {
+    display: grid;
+    grid-template-columns: 264px minmax(0, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+  .lnav {
+    padding: 1.4rem;
+    position: sticky;
+    top: 96px;
+  }
+  .lnav__h {
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+    margin-bottom: 0.9rem;
+  }
+  .lnav nav {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .lnav nav a {
+    display: block;
+    padding: 0.5rem 0.7rem;
+    border-radius: 10px;
+    font-size: var(--text-sm);
+    color: var(--ink-2);
+    border-left: 2px solid transparent;
+    transition: all 0.25s var(--ease);
+  }
+  .lnav nav a:hover {
+    color: var(--ink);
+    background: rgba(148, 176, 214, 0.07);
+  }
+  .lnav nav a.on {
+    color: var(--signal);
+    border-left-color: var(--signal);
+    background: rgba(60, 231, 196, 0.08);
+  }
+  .lnav__cta {
+    margin-top: 1.2rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .prose {
+    padding: clamp(1.5rem, 3.5vw, 3rem);
+  }
+
+  @media (max-width: 900px) {
+    .lbody__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .lnav {
+      position: static;
+    }
+    .lnav nav {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      display: grid;
+    }
+  }
+</style>
+
+<style is:global>
+  .prose h2 {
+    font-size: var(--text-lg);
+    margin: 2.2rem 0 0.7rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .prose h2:first-child {
+    margin-top: 0;
+  }
+  .prose h3 {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--ink);
+  }
+  .prose p,
+  .prose li {
+    color: var(--ink-2);
+    font-size: var(--text-base);
+    line-height: 1.75;
+  }
+  .prose p {
+    margin-bottom: 0.9rem;
+  }
+  .prose ul,
+  .prose ol {
+    margin: 0 0 1.1rem 1.1rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .prose li::marker {
+    color: var(--signal-dim);
+  }
+  .prose :is(p, li, td) a {
+    color: var(--signal);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(60, 231, 196, 0.4);
+  }
+  .prose :is(p, li, td) a:hover {
+    text-decoration-color: var(--signal);
+  }
+  .prose strong {
+    color: var(--ink);
+  }
+</style>
