@@ -48,9 +48,13 @@ const year = new Date().getFullYear();
           <span class="dot" aria-hidden="true"></span>
           <span class="mono">All systems operational</span>
         </div>
-<div class="socials" data-reveal>
-          <span class="mono socials__h">Follow us</span>
-          <div class="socials__row">
+
+
+
+
+
+      </div>
+<div class="socials__row">
             {
               CONTACT.socials.map((s) => (
                 <a href={s.href} rel="noopener" target="_blank">
@@ -59,7 +63,6 @@ const year = new Date().getFullYear();
               ))
             }
           </div>
-      </div>
 
       {
         cols.map((c) => (
